@@ -20,7 +20,7 @@ public class MarketEntranceController {
         List someList = marketEntranceService.getMarketEntranceList();
         return someList;
     }
-    @PostMapping
+    @PostMapping(consumes = "application/json", produces = "application/json")
     public MarketEntranceDAO addUser(@RequestBody MarketEntrance marketEntrance) {
         return marketEntranceService.addMarketEntrance(marketEntrance);
     }
