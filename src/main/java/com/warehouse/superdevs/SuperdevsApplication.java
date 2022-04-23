@@ -16,8 +16,8 @@ public class SuperdevsApplication {
 				SpringApplication.run(SuperdevsApplication.class, args);
 		MarketEntranceRepository marketEntranceRepository =
 				configurableApplicationContext.getBean(MarketEntranceRepository.class);
-		MarketEntranceDAO myEntrance = new MarketEntranceDAO("Google Ads", "Adventmarkt Touristik", new Date(), 7, 2213);
-		marketEntranceRepository.save(myEntrance);
+//		MarketEntranceDAO myEntrance = new MarketEntranceDAO("Google Ads", "Adventmarkt Touristik", new Date(), 7, 2213);
+//		marketEntranceRepository.save(myEntrance);
 
 	}
 
