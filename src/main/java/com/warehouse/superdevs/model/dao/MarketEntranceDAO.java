@@ -12,11 +12,11 @@ public class MarketEntranceDAO {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private final String datasource;
-    private final String campaign;
-    private final Date daily;
-    private final int clicks;
-    private final int impressions;
+    private String datasource;
+    private String campaign;
+    private Date daily;
+    private int clicks;
+    private int impressions;
 
     public MarketEntranceDAO(String datasource, String campaign, Date daily, int clicks, int impressions) {
         this.datasource = datasource;
@@ -25,7 +25,9 @@ public class MarketEntranceDAO {
         this.clicks = clicks;
         this.impressions = impressions;
     }
-    public MarketEntranceDAO() {}
+    public MarketEntranceDAO() {
+        super();
+    }
 
     public Long getId() {
         return id;
