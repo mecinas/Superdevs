@@ -1,16 +1,14 @@
 package com.warehouse.superdevs.model.pojo;
 
-import java.util.Date;
-
-public class MarketEntrance {
+public class MarketEntranceDTO {
     private Long id;
     private String datasource;
     private String campaign;
-    private Date daily;
+    private String daily;
     private int clicks;
     private int impressions;
 
-    public MarketEntrance(String datasource, String campaign, Date daily, int clicks, int impressions) {
+    public MarketEntranceDTO(String datasource, String campaign, String daily, int clicks, int impressions) {
         this.datasource = datasource;
         this.campaign = campaign;
         this.daily = daily;
@@ -30,7 +28,7 @@ public class MarketEntrance {
         return campaign;
     }
 
-    public Date getDaily() {
+    public String getDaily() {
         return daily;
     }
 
