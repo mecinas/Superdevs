@@ -16,9 +16,9 @@ public class MarketEntranceController {
     @Autowired
     private MarketEntranceService marketEntranceService;
     @GetMapping
-    public ResponseEntity<> getMarketEntranceList() {
-        List someList = marketEntranceService.getMarketEntranceList();
-        return new ResponseEntity<>(HttpStatus.OK);
+    public ResponseEntity getMarketEntranceList() {
+        //List someList = marketEntranceService.getMarketEntranceList();
+        return new ResponseEntity(HttpStatus.OK);
     }
     @PostMapping
     public MarketEntranceDAO addUser(@RequestBody MarketEntrance marketEntrance) {
