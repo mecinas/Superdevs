@@ -25,6 +25,7 @@ public class MarketEntranceDAO {
         this.clicks = clicks;
         this.impressions = impressions;
     }
+    public MarketEntranceDAO() {}
 
     public Long getId() {
         return id;
