@@ -1,22 +1,14 @@
-package com.warehouse.superdevs.model;
-
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+package com.warehouse.superdevs.model.pojo;
 
 import java.util.Date;
 
-@Entity
 public class MarketEntrance {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private final String datasource;
-    private final String campaign;
-    private final Date daily;
-    private final int clicks;
-    private final int impressions;
+    private String datasource;
+    private String campaign;
+    private Date daily;
+    private int clicks;
+    private int impressions;
 
     public MarketEntrance(String datasource, String campaign, Date daily, int clicks, int impressions) {
         this.datasource = datasource;

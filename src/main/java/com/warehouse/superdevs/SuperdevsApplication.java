@@ -1,6 +1,6 @@
 package com.warehouse.superdevs;
 
-import com.warehouse.superdevs.model.MarketEntrance;
+import com.warehouse.superdevs.model.dao.MarketEntranceDAO;
 import com.warehouse.superdevs.repository.MarketEntranceRepository;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -16,7 +16,7 @@ public class SuperdevsApplication {
 				SpringApplication.run(SuperdevsApplication.class, args);
 		MarketEntranceRepository marketEntranceRepository =
 				configurableApplicationContext.getBean(MarketEntranceRepository.class);
-		MarketEntrance myEntrance = new MarketEntrance("Google Ads", "Adventmarkt Touristik", new Date(), 7, 2213);
+		MarketEntranceDAO myEntrance = new MarketEntranceDAO("Google Ads", "Adventmarkt Touristik", new Date(), 7, 2213);
 		marketEntranceRepository.save(myEntrance);
 
 	}
