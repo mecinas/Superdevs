@@ -12,14 +12,14 @@ public class MarketEntranceDAO {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String datasource;
+    private String dataSource;
     private String campaign;
     private Date daily;
     private int clicks;
     private int impressions;
 
-    public MarketEntranceDAO(String datasource, String campaign, Date daily, int clicks, int impressions) {
-        this.datasource = datasource;
+    public MarketEntranceDAO(String dataSource, String campaign, Date daily, int clicks, int impressions) {
+        this.dataSource = dataSource;
         this.campaign = campaign;
         this.daily = daily;
         this.clicks = clicks;
@@ -33,8 +33,8 @@ public class MarketEntranceDAO {
         return id;
     }
 
-    public String getDatasource() {
-        return datasource;
+    public String getDataSource() {
+        return dataSource;
     }
 
     public String getCampaign() {

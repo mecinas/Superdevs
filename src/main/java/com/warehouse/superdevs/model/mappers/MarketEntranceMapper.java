@@ -1,7 +1,7 @@
 package com.warehouse.superdevs.model.mappers;
 
 import com.warehouse.superdevs.model.dao.MarketEntranceDAO;
-import com.warehouse.superdevs.model.pojo.MarketEntranceDTO;
+import com.warehouse.superdevs.model.dto.MarketEntranceDTO;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -14,7 +14,7 @@ public class MarketEntranceMapper {
     public static MarketEntranceDAO convertDTOtoDAO(MarketEntranceDTO marketEntranceDTO){
         try {
             Date date = new SimpleDateFormat("dd/MM/yyyy").parse(marketEntranceDTO.getDaily());
-            return new MarketEntranceDAO(marketEntranceDTO.getDatasource(), marketEntranceDTO.getCampaign(),
+            return new MarketEntranceDAO(marketEntranceDTO.getDataSource(), marketEntranceDTO.getCampaign(),
                     date, marketEntranceDTO.getClicks(), marketEntranceDTO.getImpressions());
         } catch (ParseException e) {
             return null;
@@ -22,7 +22,7 @@ public class MarketEntranceMapper {
     }
     public static MarketEntranceDTO convertDAOtoDTO(MarketEntranceDAO marketEntranceDAO){
         String date = new SimpleDateFormat("MM/dd/yy").format(marketEntranceDAO.getDaily());
-        return new MarketEntranceDTO(marketEntranceDAO.getDatasource(), marketEntranceDAO.getCampaign(),
+        return new MarketEntranceDTO(marketEntranceDAO.getDataSource(), marketEntranceDAO.getCampaign(),
                     date, marketEntranceDAO.getClicks(), marketEntranceDAO.getImpressions());
 
     }

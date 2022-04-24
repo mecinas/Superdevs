@@ -2,13 +2,13 @@ package com.warehouse.superdevs.service;
 
 import com.warehouse.superdevs.model.dao.MarketEntranceDAO;
 import com.warehouse.superdevs.model.mappers.MarketEntranceMapper;
-import com.warehouse.superdevs.model.pojo.MarketEntranceDTO;
+import com.warehouse.superdevs.model.dto.MarketEntranceDTO;
 import com.warehouse.superdevs.repository.MarketEntranceRepository;
+import com.warehouse.superdevs.repository.MarketEntranceRepositoryImpl;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.util.Streamable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -24,6 +24,7 @@ import java.util.List;
 
 @Service
 public class MarketEntranceService {
+
     @Autowired
     private MarketEntranceRepository marketEntranceRepository;
 
@@ -68,5 +69,11 @@ public class MarketEntranceService {
 
     public void clearMarketEntrances() {
         marketEntranceRepository.deleteAll();
+    }
+
+    public List<MarketEntranceDTO> filterByDataSource(String dataSource){
+        List<MarketEntranceDAO> listOfMarketEntranceDAOs = marketEntranceRepository.findByDataSource(dataSource);
+        List<MarketEntranceDTO> listOfMarketEntranceDTOs = MarketEntranceMapper.convertDAOListToDTOList(listOfMarketEntranceDAOs);
+        return listOfMarketEntranceDTOs;
     }
 }

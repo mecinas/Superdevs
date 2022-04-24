@@ -1,7 +1,6 @@
 package com.warehouse.superdevs.controller;
 
-import com.warehouse.superdevs.model.dao.MarketEntranceDAO;
-import com.warehouse.superdevs.model.pojo.MarketEntranceDTO;
+import com.warehouse.superdevs.model.dto.MarketEntranceDTO;
 import com.warehouse.superdevs.service.MarketEntranceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,11 +27,17 @@ public class MarketEntranceController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    @PostMapping(consumes = "application/json", produces = "application/json")
+    @PostMapping(consumes = "application/json")
     public ResponseEntity addUser(@RequestBody MarketEntranceDTO marketEntranceDTO) {
         if(marketEntranceService.addMarketEntrance(marketEntranceDTO) != null)
             return new ResponseEntity(HttpStatus.OK);
         return new ResponseEntity(HttpStatus.BAD_REQUEST);
+    }
+
+    @GetMapping(value = "/filter/dataSource")
+    public List filterByDataSource(@RequestParam String name) {
+        System.out.println("dataSource: " + name);
+        return marketEntranceService.filterByDataSource(name);
     }
 
     @PostMapping("upload/csv")

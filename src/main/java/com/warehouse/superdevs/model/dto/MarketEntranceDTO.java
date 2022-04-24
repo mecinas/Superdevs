@@ -1,22 +1,22 @@
-package com.warehouse.superdevs.model.pojo;
+package com.warehouse.superdevs.model.dto;
 
 public class MarketEntranceDTO {
-    private String datasource;
+    private String dataSource;
     private String campaign;
     private String daily;
     private int clicks;
     private int impressions;
 
-    public MarketEntranceDTO(String datasource, String campaign, String daily, int clicks, int impressions) {
-        this.datasource = datasource;
+    public MarketEntranceDTO(String dataSource, String campaign, String daily, int clicks, int impressions) {
+        this.dataSource = dataSource;
         this.campaign = campaign;
         this.daily = daily;
         this.clicks = clicks;
         this.impressions = impressions;
     }
 
-    public String getDatasource() {
-        return datasource;
+    public String getDataSource() {
+        return dataSource;
     }
 
     public String getCampaign() {
