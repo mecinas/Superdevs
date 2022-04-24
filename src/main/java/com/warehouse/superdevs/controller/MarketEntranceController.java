@@ -29,14 +29,16 @@ public class MarketEntranceController {
     }
 
     @PostMapping(consumes = "application/json", produces = "application/json")
-    public MarketEntranceDAO addUser(@RequestBody MarketEntranceDTO marketEntranceDTO) { //Mozna dodac obsluge blednie wprowadzonych danych
-        return marketEntranceService.addMarketEntrance(marketEntranceDTO);
+    public ResponseEntity addUser(@RequestBody MarketEntranceDTO marketEntranceDTO) {
+        if(marketEntranceService.addMarketEntrance(marketEntranceDTO) != null)
+            return new ResponseEntity(HttpStatus.OK);
+        return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 
     @PostMapping("upload/csv")
     public ResponseEntity uploadCSV(@RequestParam MultipartFile file) {
         if(marketEntranceService.isCSV(file))
-            if(marketEntranceService.convertCSVToMarketEntrances(file))
+            if(marketEntranceService.bulkCSVIntoMarketEntrances(file))
                 return new ResponseEntity(HttpStatus.OK);
         return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }

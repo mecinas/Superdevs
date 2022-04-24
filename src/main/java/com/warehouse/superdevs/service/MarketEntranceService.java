@@ -1,6 +1,7 @@
 package com.warehouse.superdevs.service;
 
 import com.warehouse.superdevs.model.dao.MarketEntranceDAO;
+import com.warehouse.superdevs.model.mappers.MarketEntranceMapper;
 import com.warehouse.superdevs.model.pojo.MarketEntranceDTO;
 import com.warehouse.superdevs.repository.MarketEntranceRepository;
 import org.apache.commons.csv.CSVFormat;
@@ -26,32 +27,18 @@ public class MarketEntranceService {
     @Autowired
     private MarketEntranceRepository marketEntranceRepository;
 
-    public List<MarketEntranceDAO> getMarketEntranceList() {
-        Iterable<MarketEntranceDAO> iterableList = marketEntranceRepository.findAll();
-        return Streamable.of(iterableList).toList();
+    public List<MarketEntranceDTO> getMarketEntranceList() {
+        Iterable<MarketEntranceDAO> listOfMarketEntranceDAOs = marketEntranceRepository.findAll();
+        List<MarketEntranceDTO> listOfMarketEntranceDTOs = MarketEntranceMapper.convertDAOListToDTOList(listOfMarketEntranceDAOs);
+        return listOfMarketEntranceDTOs;
     }
 
     public MarketEntranceDAO addMarketEntrance(MarketEntranceDTO dto) {
-        try {
-            Date entranceDate = new SimpleDateFormat("dd/MM/yyyy").parse(dto.getDaily());
-            MarketEntranceDAO marketEntranceDAO = new MarketEntranceDAO(dto.getDatasource(), dto.getCampaign(), entranceDate, dto.getClicks(), dto.getImpressions());
-            return marketEntranceRepository.save(marketEntranceDAO);
-        } catch (ParseException e) {
-            return null;
-        }
-
+        MarketEntranceDAO newDAO = MarketEntranceMapper.convertDTOtoDAO(dto);
+        return marketEntranceRepository.save(newDAO);
     }
 
-    public void clearMarketEntrances() {
-        marketEntranceRepository.deleteAll();
-    }
-
-    public boolean isCSV(MultipartFile file){
-        String csvContentType = "text/csv";
-        return csvContentType.equals(file.getContentType());
-    }
-
-    public boolean convertCSVToMarketEntrances(MultipartFile file){
+    public boolean bulkCSVIntoMarketEntrances(MultipartFile file){
         try {
             BufferedReader fileReader = new BufferedReader(new InputStreamReader(file.getInputStream(), "UTF-8"));
             CSVParser csvParser = new CSVParser(fileReader,  CSVFormat.DEFAULT.withFirstRecordAsHeader().withIgnoreHeaderCase().withTrim());
@@ -72,5 +59,14 @@ public class MarketEntranceService {
         } catch (IOException | ParseException e ) {
             return false;
         }
+    }
+
+    public boolean isCSV(MultipartFile file){
+        String csvContentType = "text/csv";
+        return csvContentType.equals(file.getContentType());
+    }
+
+    public void clearMarketEntrances() {
+        marketEntranceRepository.deleteAll();
     }
 }

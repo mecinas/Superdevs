@@ -1,7 +1,6 @@
 package com.warehouse.superdevs.model.pojo;
 
 public class MarketEntranceDTO {
-    private Long id;
     private String datasource;
     private String campaign;
     private String daily;
@@ -14,10 +13,6 @@ public class MarketEntranceDTO {
         this.daily = daily;
         this.clicks = clicks;
         this.impressions = impressions;
-    }
-
-    public Long getId() {
-        return id;
     }
 
     public String getDatasource() {
