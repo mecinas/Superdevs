@@ -16,9 +16,9 @@ public class MarketEntranceController {
     @Autowired
     private MarketEntranceService marketEntranceService;
     @GetMapping
-    public List getMarketEntranceList() {
+    public ResponseEntity<List> getMarketEntranceList() {
         List someList = marketEntranceService.getMarketEntranceList();
-        return someList;
+        return new ResponseEntity<>(someList, HttpStatus.OK);
     }
 
     @DeleteMapping
@@ -35,9 +35,13 @@ public class MarketEntranceController {
     }
 
     @GetMapping(value = "/filter/dataSource")
-    public List filterByDataSource(@RequestParam String name) {
-        System.out.println("dataSource: " + name);
-        return marketEntranceService.filterByDataSource(name);
+    public ResponseEntity<List> filterByDataSource(@RequestParam String dataSource) {
+        return new ResponseEntity<>(marketEntranceService.filterByDataSource(dataSource), HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/filter/clicksDataSourceDataRange")
+    public ResponseEntity<List> filterByDataSource(@RequestParam String dataSource, @RequestParam String startDate, @RequestParam String endDate) {
+        return new ResponseEntity<>(marketEntranceService.clicksFromDataSourceAndTime(dataSource, startDate, endDate), HttpStatus.OK);
     }
 
     @PostMapping("upload/csv")

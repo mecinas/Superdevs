@@ -4,7 +4,6 @@ import com.warehouse.superdevs.model.dao.MarketEntranceDAO;
 import com.warehouse.superdevs.model.mappers.MarketEntranceMapper;
 import com.warehouse.superdevs.model.dto.MarketEntranceDTO;
 import com.warehouse.superdevs.repository.MarketEntranceRepository;
-import com.warehouse.superdevs.repository.MarketEntranceRepositoryImpl;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
@@ -18,7 +17,6 @@ import java.io.InputStreamReader;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 
@@ -27,6 +25,8 @@ public class MarketEntranceService {
 
     @Autowired
     private MarketEntranceRepository marketEntranceRepository;
+
+    private final SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yy");
 
     public List<MarketEntranceDTO> getMarketEntranceList() {
         Iterable<MarketEntranceDAO> listOfMarketEntranceDAOs = marketEntranceRepository.findAll();
@@ -49,7 +49,7 @@ public class MarketEntranceService {
                 MarketEntranceDAO marketEntranceDAO = new MarketEntranceDAO(
                         csvRecord.get("Datasource"),
                         csvRecord.get("Campaign"),
-                        new SimpleDateFormat("MM/dd/yy").parse(csvRecord.get("Daily")),
+                        formatter.parse(csvRecord.get("Daily")),
                 Integer.parseInt(csvRecord.get("Clicks")),
                         Integer.parseInt(csvRecord.get("Impressions"))
                 );
@@ -75,5 +75,17 @@ public class MarketEntranceService {
         List<MarketEntranceDAO> listOfMarketEntranceDAOs = marketEntranceRepository.findByDataSource(dataSource);
         List<MarketEntranceDTO> listOfMarketEntranceDTOs = MarketEntranceMapper.convertDAOListToDTOList(listOfMarketEntranceDAOs);
         return listOfMarketEntranceDTOs;
+    }
+
+    public List<MarketEntranceDTO> clicksFromDataSourceAndTime(String dataSource, String startDate, String endDate){
+        try {
+            List<MarketEntranceDAO> listOfMarketEntranceDAOs = marketEntranceRepository.findClicksByDataSourceAndTime(dataSource,
+                    formatter.parse(startDate), formatter.parse(endDate));
+            List<MarketEntranceDTO> listOfMarketEntranceDTOs = MarketEntranceMapper.convertDAOListToDTOList(listOfMarketEntranceDAOs);
+            return listOfMarketEntranceDTOs;
+        } catch (ParseException e) {
+            return null;
+        }
+
     }
 }

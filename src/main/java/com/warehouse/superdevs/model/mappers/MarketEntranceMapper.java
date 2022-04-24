@@ -13,7 +13,8 @@ public class MarketEntranceMapper {
 
     public static MarketEntranceDAO convertDTOtoDAO(MarketEntranceDTO marketEntranceDTO){
         try {
-            Date date = new SimpleDateFormat("dd/MM/yyyy").parse(marketEntranceDTO.getDaily());
+            //Date date = new SimpleDateFormat("dd/MM/yyyy").parse(marketEntranceDTO.getDaily());
+            Date date = new SimpleDateFormat("MM/dd/yy").parse(marketEntranceDTO.getDaily());
             return new MarketEntranceDAO(marketEntranceDTO.getDataSource(), marketEntranceDTO.getCampaign(),
                     date, marketEntranceDTO.getClicks(), marketEntranceDTO.getImpressions());
         } catch (ParseException e) {
