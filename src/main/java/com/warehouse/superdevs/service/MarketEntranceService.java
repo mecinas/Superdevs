@@ -1,6 +1,5 @@
 package com.warehouse.superdevs.service;
 
-import com.warehouse.superdevs.agregate.AgregateClicksByDataSource;
 import com.warehouse.superdevs.model.dao.MarketEntranceDAO;
 import com.warehouse.superdevs.model.mappers.MarketEntranceMapper;
 import com.warehouse.superdevs.model.dto.MarketEntranceDTO;
@@ -78,16 +77,29 @@ public class MarketEntranceService {
         return listOfMarketEntranceDTOs;
     }
 
-    public List<Object> clicksFromDataSourceAndTime(String dataSource, String startDate, String endDate){
+    public List<Object> clicksFromDataSourceAndTime(String startDate, String endDate){
         try {
-            List<Object> clicksByDataSource = marketEntranceRepository.findClicksByDataSourceAndTime(dataSource,
-                    formatter.parse(startDate), formatter.parse(endDate));
+            List<Object> clicksByDataSource = marketEntranceRepository.findClicksByDataSourceAndTime(formatter.parse(startDate), formatter.parse(endDate));
             return clicksByDataSource;
         } catch (ParseException e) {
             return null;
         }
+    }
 
+    public List<Object> clicksFromDataSourceAndTime(String dataSource, String startDate, String endDate){
+        try {
+            List<Object> clicksByDataSource = marketEntranceRepository.findClicksByDataSourceAndTime(dataSource, formatter.parse(startDate), formatter.parse(endDate));
+            return clicksByDataSource;
+        } catch (ParseException e) {
+            return null;
+        }
+    }
 
+    public List<Object> findClickThroughRateByDataSourceAndCampaign(){
+        return marketEntranceRepository.findClickThroughRateByDataSourceAndCampaign();
+    }
 
+    public List<Object> findClickThroughRateByDataSourceAndCampaign(String dataSource, String campaign){
+        return marketEntranceRepository.findClickThroughRateByDataSourceAndCampaign(dataSource, campaign);
     }
 }

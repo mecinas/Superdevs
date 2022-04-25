@@ -1,6 +1,5 @@
 package com.warehouse.superdevs.controller;
 
-import com.warehouse.superdevs.agregate.AgregateClicksByDataSource;
 import com.warehouse.superdevs.model.dto.MarketEntranceDTO;
 import com.warehouse.superdevs.service.MarketEntranceService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,16 +34,6 @@ public class MarketEntranceController {
         return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 
-    @GetMapping(value = "/filter/dataSource")
-    public ResponseEntity<List> filterByDataSource(@RequestParam String dataSource) {
-        return new ResponseEntity<>(marketEntranceService.filterByDataSource(dataSource), HttpStatus.OK);
-    }
-
-    @GetMapping(value = "/filter/clicksDataSourceDataRange")
-    public ResponseEntity<List> filterByDataSource(@RequestParam String dataSource, @RequestParam String startDate, @RequestParam String endDate) {
-        return new ResponseEntity<>(marketEntranceService.clicksFromDataSourceAndTime(dataSource, startDate, endDate), HttpStatus.OK);
-    }
-
     @PostMapping("upload/csv")
     public ResponseEntity uploadCSV(@RequestParam MultipartFile file) {
         if(marketEntranceService.isCSV(file))
@@ -52,4 +41,5 @@ public class MarketEntranceController {
                 return new ResponseEntity(HttpStatus.OK);
         return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
+
 }

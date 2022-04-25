@@ -717,3 +717,6 @@ SELECT RES.DATA_SOURCE, SUM(RES.CLICKS) FROM (SELECT * FROM MARKET_ENTRANCEDAO M
 	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.base/java.lang.Thread.run(Thread.java:833)
+2022-04-25 13:26:46 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "SELECT RES.DATA_SOURCE, SUM(RES.CLICKS) FROM (SELECT * FROM MARKET_ENTRANCEDAO ME WHERE ME.DATA_SOURCE = ? AND ME.DAILY BETWEEN ? AND ?) RESGROUP [*]BY RES.DATA_SOURCE"; SQL statement:
+SELECT RES.DATA_SOURCE, SUM(RES.CLICKS) FROM (SELECT * FROM MARKET_ENTRANCEDAO ME WHERE ME.DATA_SOURCE = ? AND ME.DAILY BETWEEN ? AND ?) RESGROUP BY RES.DATA_SOURCE [42000-212]
