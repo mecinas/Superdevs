@@ -23,11 +23,28 @@ public class FilterController {
     }
 
 
-    @GetMapping(value = "/clicksDataSourceDataRange")
-    public ResponseEntity<List> filterDataRangeForClicksWithDataSource(@RequestParam Optional<String> dataSource, @RequestParam String startDate, @RequestParam String endDate) {
+    @GetMapping(value = "/clicksSumDataSourceAndDataRange")
+    public ResponseEntity<List> filterClicksWithDataSourceInDataRange(@RequestParam Optional<String> dataSource,
+                                                                       @RequestParam String startDate, @RequestParam String endDate) {
         if(dataSource.equals(Optional.empty()))
-            return new ResponseEntity<>(marketEntranceService.clicksFromDataSourceAndTime(startDate, endDate), HttpStatus.OK);
-        return new ResponseEntity<>(marketEntranceService.clicksFromDataSourceAndTime(dataSource.get(), startDate, endDate), HttpStatus.OK);
+            return new ResponseEntity<>(marketEntranceService.clicksFromDataSourceAndDataRange(startDate, endDate), HttpStatus.OK);
+        return new ResponseEntity<>(marketEntranceService.clicksFromDataSourceAndDataRange(dataSource.get() ,startDate, endDate), HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/clicksSumCampaignAndDataRange")
+    public ResponseEntity<List> filterClicksWithCampaignInDataRange(@RequestParam Optional<String> campaign,
+                                                                      @RequestParam String startDate, @RequestParam String endDate) {
+        if(campaign.equals(Optional.empty()))
+            return new ResponseEntity<>(marketEntranceService.clicksFromCampaignAndDataRange(startDate, endDate), HttpStatus.OK);
+        return new ResponseEntity<>(marketEntranceService.clicksFromCampaignAndDataRange(campaign.get() ,startDate, endDate), HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/clicksSumDataSourceCampaignAndDataRange")
+    public ResponseEntity<List> filterClicksWithDataSourceCampaignInDataRange(@RequestParam Optional<String> dataSource, @RequestParam Optional<String> campaign,
+                                                                    @RequestParam String startDate, @RequestParam String endDate) {
+        if(!dataSource.equals(Optional.empty()) && !campaign.equals(Optional.empty()))
+            return new ResponseEntity<>(marketEntranceService.clicksFromDataSourceCampaignAndDataRange(dataSource.get(), campaign.get(), startDate, endDate), HttpStatus.OK);
+        return new ResponseEntity<>(marketEntranceService.clicksFromDataSourceCampaignAndDataRange(startDate, endDate), HttpStatus.OK);
     }
 
 
@@ -36,6 +53,13 @@ public class FilterController {
         if(dataSource.equals(Optional.empty()) || campaign.equals(Optional.empty()))
             return new ResponseEntity<>(marketEntranceService.findClickThroughRateByDataSourceAndCampaign(), HttpStatus.OK);
         return new ResponseEntity<>(marketEntranceService.findClickThroughRateByDataSourceAndCampaign(dataSource.get(), campaign.get()), HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/impressionThroughRateByDataSourceAndCampaign")
+    public ResponseEntity<List> filterImpressionThroughRateByDataSourceAndCampaign(@RequestParam Optional<String> dataSource, @RequestParam Optional<String> campaign) {
+        if(dataSource.equals(Optional.empty()) || campaign.equals(Optional.empty()))
+            return new ResponseEntity<>(marketEntranceService.findImpressionThroughRateByDataSourceAndCampaign(), HttpStatus.OK);
+        return new ResponseEntity<>(marketEntranceService.findImpressionThroughRateByDataSourceAndCampaign(dataSource.get(), campaign.get()), HttpStatus.OK);
     }
 
 }

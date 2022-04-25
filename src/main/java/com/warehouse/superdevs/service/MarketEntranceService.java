@@ -77,18 +77,55 @@ public class MarketEntranceService {
         return listOfMarketEntranceDTOs;
     }
 
-    public List<Object> clicksFromDataSourceAndTime(String startDate, String endDate){
+    public List<Object> clicksFromDataSourceAndDataRange(String startDate, String endDate){
         try {
-            List<Object> clicksByDataSource = marketEntranceRepository.findClicksByDataSourceAndTime(formatter.parse(startDate), formatter.parse(endDate));
+            List<Object> clicksByDataSource = marketEntranceRepository.findClicksByDataSourceAndDateRange(formatter.parse(startDate), formatter.parse(endDate));
             return clicksByDataSource;
         } catch (ParseException e) {
             return null;
         }
     }
 
-    public List<Object> clicksFromDataSourceAndTime(String dataSource, String startDate, String endDate){
+    public List<Object> clicksFromDataSourceAndDataRange(String dataSource, String startDate, String endDate){
         try {
-            List<Object> clicksByDataSource = marketEntranceRepository.findClicksByDataSourceAndTime(dataSource, formatter.parse(startDate), formatter.parse(endDate));
+            List<Object> clicksByDataSource = marketEntranceRepository.findClicksByDataSourceAndDateRange(dataSource, formatter.parse(startDate), formatter.parse(endDate));
+            return clicksByDataSource;
+        } catch (ParseException e) {
+            return null;
+        }
+    }
+
+    public List<Object> clicksFromCampaignAndDataRange(String startDate, String endDate){
+        try {
+            List<Object> clicksByDataSource = marketEntranceRepository.findClicksByCampaignAndDataRange(formatter.parse(startDate), formatter.parse(endDate));
+            return clicksByDataSource;
+        } catch (ParseException e) {
+            return null;
+        }
+    }
+
+    public List<Object> clicksFromCampaignAndDataRange(String campaign, String startDate, String endDate){
+        try {
+            List<Object> clicksByDataSource = marketEntranceRepository.findClicksByCampaignAndDataRange(campaign, formatter.parse(startDate), formatter.parse(endDate));
+            return clicksByDataSource;
+        } catch (ParseException e) {
+            return null;
+        }
+    }
+
+    public List<Object> clicksFromDataSourceCampaignAndDataRange(String startDate, String endDate){
+        try {
+            List<Object> clicksByDataSource = marketEntranceRepository.findClicksByDataSourceCampaignAndDateRange(formatter.parse(startDate), formatter.parse(endDate));
+            return clicksByDataSource;
+        } catch (ParseException e) {
+            return null;
+        }
+    }
+
+    public List<Object> clicksFromDataSourceCampaignAndDataRange(String dataSource, String campaign, String startDate, String endDate){
+        try {
+            List<Object> clicksByDataSource = marketEntranceRepository.findClicksByDataSourceCampaignAndDateRange(dataSource, campaign,
+                    formatter.parse(startDate), formatter.parse(endDate));
             return clicksByDataSource;
         } catch (ParseException e) {
             return null;
@@ -101,5 +138,13 @@ public class MarketEntranceService {
 
     public List<Object> findClickThroughRateByDataSourceAndCampaign(String dataSource, String campaign){
         return marketEntranceRepository.findClickThroughRateByDataSourceAndCampaign(dataSource, campaign);
+    }
+
+    public List<Object> findImpressionThroughRateByDataSourceAndCampaign(){
+        return marketEntranceRepository.findImpressionThroughRateByDataSourceAndCampaign();
+    }
+
+    public List<Object> findImpressionThroughRateByDataSourceAndCampaign(String dataSource, String campaign){
+        return marketEntranceRepository.findImpressionThroughRateByDataSourceAndCampaign(dataSource, campaign);
     }
 }
