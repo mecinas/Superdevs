@@ -1,5 +1,6 @@
 package com.warehouse.superdevs.service;
 
+import com.warehouse.superdevs.agregate.AgregateClicksByDataSource;
 import com.warehouse.superdevs.model.dao.MarketEntranceDAO;
 import com.warehouse.superdevs.model.mappers.MarketEntranceMapper;
 import com.warehouse.superdevs.model.dto.MarketEntranceDTO;
@@ -77,15 +78,16 @@ public class MarketEntranceService {
         return listOfMarketEntranceDTOs;
     }
 
-    public List<MarketEntranceDTO> clicksFromDataSourceAndTime(String dataSource, String startDate, String endDate){
+    public List<Object> clicksFromDataSourceAndTime(String dataSource, String startDate, String endDate){
         try {
-            List<MarketEntranceDAO> listOfMarketEntranceDAOs = marketEntranceRepository.findClicksByDataSourceAndTime(dataSource,
+            List<Object> clicksByDataSource = marketEntranceRepository.findClicksByDataSourceAndTime(dataSource,
                     formatter.parse(startDate), formatter.parse(endDate));
-            List<MarketEntranceDTO> listOfMarketEntranceDTOs = MarketEntranceMapper.convertDAOListToDTOList(listOfMarketEntranceDAOs);
-            return listOfMarketEntranceDTOs;
+            return clicksByDataSource;
         } catch (ParseException e) {
             return null;
         }
+
+
 
     }
 }

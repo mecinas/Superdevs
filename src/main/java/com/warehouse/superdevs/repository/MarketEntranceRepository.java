@@ -1,5 +1,6 @@
 package com.warehouse.superdevs.repository;
 
+import com.warehouse.superdevs.agregate.AgregateClicksByDataSource;
 import com.warehouse.superdevs.model.dao.MarketEntranceDAO;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -14,7 +15,8 @@ public interface MarketEntranceRepository extends JpaRepository<MarketEntranceDA
 
     List<MarketEntranceDAO> findByDataSource(@Param("DATASOURCE") String dataSource);
 
-    @Query(value = "SELECT * FROM MARKET_ENTRANCEDAO ME WHERE ME.DATA_SOURCE = :DATASOURCE AND DAILY BETWEEN :STARTDATE AND :ENDDATE", nativeQuery = true)
-    List<MarketEntranceDAO> findClicksByDataSourceAndTime(@Param("DATASOURCE") String dataSource,
-                                                          @Param("STARTDATE") Date startDate, @Param("ENDDATE") Date endDate);
+    @Query(value = "SELECT RES.DATA_SOURCE, SUM(RES.CLICKS) FROM " +
+            "(SELECT * FROM MARKET_ENTRANCEDAO ME WHERE DATA_SOURCE = :DATA_SOURCE AND DAILY BETWEEN :STARTDATE AND :ENDDATE) RES GROUP BY RES.DATA_SOURCE"
+            , nativeQuery = true)
+    List<Object> findClicksByDataSourceAndTime(@Param("DATA_SOURCE") String dataSource, @Param("STARTDATE") Date startDate, @Param("ENDDATE") Date endDate);
 }
