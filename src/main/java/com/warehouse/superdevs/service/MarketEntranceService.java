@@ -147,4 +147,14 @@ public class MarketEntranceService {
     public List<Object> findImpressionThroughRateByDataSourceAndCampaign(String dataSource, String campaign){
         return marketEntranceRepository.findImpressionThroughRateByDataSourceAndCampaign(dataSource, campaign);
     }
+
+    public MarketEntranceDTO findHighestClickDayForDataSourceCampaign(String dataSource, String campaign){
+        MarketEntranceDAO marketEntranceDAO = marketEntranceRepository.findHighestClickDayForDataSourceCampaign(dataSource, campaign);
+        return MarketEntranceMapper.convertDAOtoDTO(marketEntranceDAO);
+    }
+
+    public MarketEntranceDTO findHighestImpressionDayForDataSourceCampaign(String dataSource, String campaign){
+        MarketEntranceDAO marketEntranceDAO = marketEntranceRepository.findHighestImpressionDayForDataSourceCampaign(dataSource, campaign);
+        return MarketEntranceMapper.convertDAOtoDTO(marketEntranceDAO);
+    }
 }

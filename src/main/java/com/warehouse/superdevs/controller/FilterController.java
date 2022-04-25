@@ -1,7 +1,9 @@
 package com.warehouse.superdevs.controller;
 
+import com.warehouse.superdevs.model.dao.MarketEntranceDAO;
 import com.warehouse.superdevs.model.dto.MarketEntranceDTO;
 import com.warehouse.superdevs.service.MarketEntranceService;
+import jdk.swing.interop.SwingInterOpUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -60,6 +62,18 @@ public class FilterController {
         if(dataSource.equals(Optional.empty()) || campaign.equals(Optional.empty()))
             return new ResponseEntity<>(marketEntranceService.findImpressionThroughRateByDataSourceAndCampaign(), HttpStatus.OK);
         return new ResponseEntity<>(marketEntranceService.findImpressionThroughRateByDataSourceAndCampaign(dataSource.get(), campaign.get()), HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/impressionHighestDayByDataSourceAndCampaign")
+    public ResponseEntity<MarketEntranceDTO> filterHighestImpressionDayForDataSourceCampaign(@RequestParam String dataSource, @RequestParam String campaign) {
+        return new ResponseEntity<>(marketEntranceService.findHighestImpressionDayForDataSourceCampaign(dataSource, campaign), HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/clickHighestDayByDataSourceAndCampaign")
+    public ResponseEntity<MarketEntranceDTO> filterHighestClickDayForDataSourceCampaign(@RequestParam String dataSource, @RequestParam String campaign) {
+        System.out.println(campaign);
+        System.out.println("DEBUG");
+        return new ResponseEntity<>(marketEntranceService.findHighestClickDayForDataSourceCampaign(dataSource, campaign), HttpStatus.OK);
     }
 
 }

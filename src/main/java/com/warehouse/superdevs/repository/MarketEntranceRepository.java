@@ -73,4 +73,20 @@ public interface MarketEntranceRepository extends JpaRepository<MarketEntranceDA
             "GROUP BY RES.DATA_SOURCE, RES.CAMPAIGN"
             , nativeQuery = true)
     List<Object> findImpressionThroughRateByDataSourceAndCampaign(@Param("DATA_SOURCE") String dataSource, @Param("CAMPAIGN") String campaign);
+
+    @Query(value = "SELECT MEX.* FROM MARKET_ENTRANCEDAO MEX JOIN " +
+            "(SELECT RES_1.DATA_SOURCE, RES_1.CAMPAIGN, MAX(RES_1.CLICKS) AS MAX_CLICKS FROM " +
+            "(SELECT * FROM MARKET_ENTRANCEDAO ME WHERE ME.DATA_SOURCE = :DATA_SOURCE AND ME.CAMPAIGN = :CAMPAIGN) RES_1 " +
+            "GROUP BY RES_1.DATA_SOURCE, RES_1.CAMPAIGN) " +
+            "RES_2 ON (MEX.CLICKS = RES_2.MAX_CLICKS) WHERE MEX.DATA_SOURCE = :DATA_SOURCE AND MEX.CAMPAIGN = :CAMPAIGN"
+            , nativeQuery = true)
+    MarketEntranceDAO findHighestClickDayForDataSourceCampaign(@Param("DATA_SOURCE") String dataSource, @Param("CAMPAIGN") String campaign);
+
+    @Query(value = "SELECT MEX.* FROM MARKET_ENTRANCEDAO MEX JOIN " +
+            "(SELECT RES_1.DATA_SOURCE, RES_1.CAMPAIGN, MAX(RES_1.IMPRESSIONS) AS MAX_IMPRESSIONS FROM " +
+            "(SELECT * FROM MARKET_ENTRANCEDAO ME WHERE ME.DATA_SOURCE = :DATA_SOURCE AND ME.CAMPAIGN = :CAMPAIGN) RES_1 " +
+            "GROUP BY RES_1.DATA_SOURCE, RES_1.CAMPAIGN) " +
+            "RES_2 ON (MEX.IMPRESSIONS = RES_2.MAX_IMPRESSIONS) WHERE MEX.DATA_SOURCE = :DATA_SOURCE AND MEX.CAMPAIGN = :CAMPAIGN"
+            , nativeQuery = true)
+    MarketEntranceDAO findHighestImpressionDayForDataSourceCampaign(@Param("DATA_SOURCE") String dataSource, @Param("CAMPAIGN") String campaign);
 }
