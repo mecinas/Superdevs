@@ -1,0 +1,252 @@
+{
+	"info": {
+		"_postman_id": "1e5b0e70-ac75-4b87-8ca9-9a99bccce251",
+		"name": "Superdevs",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "core",
+			"item": [
+				{
+					"name": "Get market entrances",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/user",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post single market entrance",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"dataSource\": \"Google Ads\",\n    \"campaign\": \"Adventmarkt Touristik\",\n    \"daily\": \"11/12/19\",\n    \"clicks\": 7,\n    \"impressions\": 1111\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/marketEntrance",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"marketEntrance"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Bulk market entrances",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/home/szymon/Downloads/input.csv"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/marketEntrance/upload/csv",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"marketEntrance",
+								"upload",
+								"csv"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete market entrances",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/marketEntrance",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"marketEntrance"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "filter",
+			"item": [
+				{
+					"name": "Filter by DataSource",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sum of clicks in specific data source for date range",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sum of clicks in data source for date range",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sum of clicks in specific campaign for date range",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sum of clicks in campaign for date range",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sum of clicks in specific data source and campaign for date range",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sum of clicks in data source and campaign for date range",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Click through Rate in specific data source and campaign",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Click through Rate in data source and campaign",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Impression through Rate in specific data source and campaign",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Impression through Rate in data source and campaign",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Highest Click day in data source and campaign",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Highest Impression day in data source and campaign",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

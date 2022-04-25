@@ -4,6 +4,7 @@ import com.warehouse.superdevs.model.dao.MarketEntranceDAO;
 import com.warehouse.superdevs.model.mappers.MarketEntranceMapper;
 import com.warehouse.superdevs.model.dto.MarketEntranceDTO;
 import com.warehouse.superdevs.repository.MarketEntranceRepository;
+import jakarta.persistence.Tuple;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
